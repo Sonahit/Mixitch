@@ -1,5 +1,3 @@
-import Observer from "./MObserver.js";
-
 export default class MLikeT {
   constructor() {
     this.retriever = 0;
@@ -115,7 +113,6 @@ export default class MLikeT {
       msgLikeTwitch(msgContainer);
     }
   }
-  reload() {}
 }
 
 export function msgLikeTwitch(msgContainer) {
@@ -140,27 +137,16 @@ export function msgLikeTwitch(msgContainer) {
         badge.parentNode.removeChild(badge);
         userName.parentNode.prepend(badge);
       }
+      if (window.MUser) {
+        const mentions = msgTab.getElementsByTagName("a");
+        for (let i = 0; i < mentions.length; i++) {
+          const mention = mentions[i];
+          if (mention.innerText.includes(`@${window.MUser.userName}`)) {
+            msgTab.style.backgroundColor = "hsla(0,0%,100%,.05)";
+          }
+        }
+      }
       userName.parentNode.style.marginLeft = "5px";
-    } else {
-      mixerChat.log(msgTab, "log");
     }
   }
 }
-
-const mixerChat = new MLikeT();
-const observer = new Observer({ attributes: true, childList: true, subtree: true });
-
-window.addEventListener("gotchat", e => {
-  const chatData = e.detail;
-  observer.observe(chatData);
-});
-
-setInterval(() => {
-  if (location.href !== mixerChat.location.href) {
-    mixerChat.location = location;
-    mixerChat.tryToRetrieveChat();
-  }
-}, 1000);
-
-window.MObserver = observer;
-window.MLikeT = mixerChat;

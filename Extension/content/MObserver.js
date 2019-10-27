@@ -1,8 +1,8 @@
 import { msgLikeTwitch } from "./MLikeT.js";
 
 export default class MObserver extends MutationObserver {
-  constructor(config) {
-    super(makeLikeTwitch);
+  constructor(config, callback = makeLikeTwitch) {
+    super(callback);
     this.config = config;
   }
 
