@@ -1,6 +1,6 @@
 {
   "name": "Mixitch",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Format mixer chat to twitch chat",
   "manifest_version": 2,
   "permissions": ["storage", "https://mixer.com/*"],
