@@ -12,6 +12,10 @@ export default class MObserver extends MutationObserver {
 }
 
 function makeLikeTwitch(mutatedList) {
-  const lastMutate = mutatedList[mutatedList.length - 1].addedNodes[0];
-  if (lastMutate && lastMutate.parentNode) msgLikeTwitch(lastMutate.parentNode);
+  const mutatedNode = mutatedList[0];
+  if (mutatedNode.addedNodes.length > 0) {
+    const targetNode = mutatedNode.target;
+    const lastMutate = targetNode.children[targetNode.children.length - 1];
+    if (lastMutate) msgLikeTwitch(lastMutate);
+  }
 }

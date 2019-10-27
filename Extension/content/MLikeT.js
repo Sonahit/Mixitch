@@ -119,11 +119,11 @@ export default class MLikeT {
 }
 
 export function msgLikeTwitch(msgContainer) {
-  if (!msgContainer.getAttribute("mliket")) {
+  if (msgContainer.getAttribute && !msgContainer.getAttribute("mliket")) {
     msgContainer.setAttribute("mliket", "true");
     const [el_1, el_2] = msgContainer.childNodes;
     const msgTab = el_1 && el_1.className && el_1.className.includes("timeStamp") ? el_2 : el_1;
-    if (msgTab.getElementsByTagName) {
+    if (msgTab && msgTab.getElementsByTagName) {
       let avatar, badge;
       const imgs = msgTab.getElementsByTagName("img");
       if (imgs) [avatar, badge] = imgs;
@@ -141,6 +141,8 @@ export function msgLikeTwitch(msgContainer) {
         userName.parentNode.prepend(badge);
       }
       userName.parentNode.style.marginLeft = "5px";
+    } else {
+      mixerChat.log(msgTab, "log");
     }
   }
 }
