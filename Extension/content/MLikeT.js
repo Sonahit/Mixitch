@@ -46,10 +46,10 @@ export default class MLikeT {
         if (document.getElementsByClassName("chat-container")[0]) {
           const chat = document.getElementsByClassName("chat-container")[0];
           if (!chat.lastChild) return;
-          if (!chat.lastChild.firstChild) return;
-          if (!chat.lastChild.firstChild.firstChild) return;
-          if (!chat.lastChild.firstChild.firstChild.firstChild) return;
-          const chatContainer = chat.lastChild.firstChild.firstChild.firstChild;
+          if (!chat.lastChild.children[0]) return;
+          if (!chat.lastChild.children[0].children[0]) return;
+          if (!chat.lastChild.children[0].children[0].children[0]) return;
+          const chatContainer = chat.lastChild.children[0].children[0].children[0];
           if (chatContainer && chatContainer.className && chatContainer.className.includes("ChatMessages")) {
             const messages = chatContainer.childNodes;
             if (messages.length > 1) {
@@ -70,8 +70,8 @@ export default class MLikeT {
                   });
               }
               this.chatData = () => {
-                const chatContainer = this.chat.lastChild.firstChild.firstChild.firstChild;
-                if (chatContainer.firstChild) return chatContainer.firstChild;
+                const chatContainer = this.chat.lastChild.children[0].children[0].children[0];
+                if (chatContainer.children[0]) return chatContainer.children[0];
               };
               this.retriever = 0;
               this.log(`Got chat at ${this.location.href} :)`, "log");
