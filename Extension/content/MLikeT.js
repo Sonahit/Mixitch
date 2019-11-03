@@ -73,6 +73,15 @@ export default class MLikeT {
                 const chatContainer = this.chat.lastChild.children[0].children[0].children[0];
                 if (chatContainer.children[0]) return chatContainer.children[0];
               };
+              const host = document.querySelectorAll("bui-tab-bar")[1];
+              if (host && !host.getAttribute("mliket")) {
+                host.setAttribute("mliket", "true");
+                Array.from(host.children).forEach(tab =>
+                  tab.addEventListener("click", () => {
+                    this.tryToRetrieveChat();
+                  })
+                );
+              }
               this.retriever = 0;
               this.log(`Got chat at ${this.location.href} :)`, "log");
               this.makeLikeTwitch(this.chatData);
